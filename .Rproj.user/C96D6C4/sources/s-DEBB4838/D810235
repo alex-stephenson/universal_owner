@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1604052094729.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D810235",
+    "lastKnownWriteTime" : 1604151119,
+    "last_content_update" : 1604151119220,
+    "path" : "~/Desktop/R_Studio_Work/websites/Universal_Owner/blackrock_test.Rmd",
+    "project_path" : "blackrock_test.Rmd",
+    "properties" : {
+        "cursorPosition" : "22,7",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,33 @@
+---
+title: "origin_analysis"
+author: "Alex Stephenson"
+date: "30/10/2020"
+output:
+  word_document: default
+  html_document: default
+---
+
+
+```{r results = "asis",warning =F}
+library(tidyverse)
+
+
+origin_data <- read_lines('Origin_Engagement_text.txt')
+
+origin_df <- origin_data %>% 
+  as_data_frame(.) 
+
+
+colnames(origin_df) <- c('terms')
+
+br_data <- origin_df %>% 
+  filter(str_detect(terms, "Origin")) %>%   
+  filter(str_detect(terms, "ACCR")) %>% 
+  distinct(.)
+
+class(br_data)
+
+write_csv(br_data, "blackrock.csv")
+
+```
+

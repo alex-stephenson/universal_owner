@@ -1,0 +1,157 @@
+library(shinydashboard)
+library(tidyverse)
+library(shiny)
+
+
+
+
+
+
+ui <- fluidPage(
+  titlePanel("Download data"),
+  sidebarLayout(
+    sidebarPanel(
+      fileInput("file1", "Choose .txt file",
+                multiple = F,
+                accept = c(".txt")),
+      textInput('energy_co', 'Name of energy company'),
+      textInput('asset', 'name of Asset Manager'),
+      downloadButton("downloadData", "Download")
+    ),
+    
+    mainPanel(
+      tableOutput("table")
+    )
+    
+  )
+)
+
+
+
+
+### section 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####server <- function(input, output, session) {
+
+options(shiny.maxRequestSize=30*1024^2)
+
+
+data <- reactive({
+  req(input$file1)
+  data <- read_lines(input$file1$datapath)
+  text_df <- as_data_frame(data)
+  
+  company_data <- text_df %>% 
+    filter(str_detect(value, input$asset)) %>%   
+    filter(str_detect(value, input$energy_co)) %>% 
+    distinct(.)
+})
+
+
+output$table <- renderTable({  
+  data
+  
+})
+
+output$downloadData <- downloadHandler(
+  filename = function() {
+    paste(company_data, ".csv", sep = "")
+  },
+  content = function(file) {
+    write.csv(company_data, file1, row.names = FALSE)
+  }
+)
+
+}
+
+
+shinyApp(ui, server)
+
+
+
+
+
+
+
+ui <- fluidPage(
+  titlePanel("Download data"),
+  sidebarLayout(
+    sidebarPanel(
+      fileInput("file1", "Choose .txt file",
+                multiple = F,
+                accept = c(".txt")),
+      textInput('energy_co', 'Name of energy company'),
+      textInput('asset', 'name of Asset Manager'),
+      downloadButton("downloadData", "Download")
+    ),
+    
+    mainPanel(
+      tableOutput("table")
+    )
+    
+  )
+)
+
+
+
+
+server <- function(input, output, session) {
+  
+  options(shiny.maxRequestSize=30*1024^2)
+  
+  
+  data <- reactive({
+    req(input$file1)
+    data <- read_lines(input$file1$datapath)
+    text_df <- as_data_frame(data)
+    
+    company_data <- text_df %>% 
+      filter(str_detect(terms, input$asset)) %>%   
+      filter(str_detect(terms, input$energy_co)) %>% 
+      distinct(.)
+  })
+  
+  
+  output$table <- renderTable({  
+    data()
+    
+  })
+  
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste(company_data, ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(company_data, file1, row.names = FALSE)
+    }
+  )
+  
+}
+
+
+shinyApp(ui, server)
+
+
+
+
+
+
+

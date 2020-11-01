@@ -1,0 +1,10 @@
+output$downloadData <- downloadHandler(
+  filename = function() {
+    paste(company_data, ".csv", sep = "")
+  },
+  content = function(file) {
+    write.csv(company_data, file1, row.names = FALSE)
+  }
+)
+
+}

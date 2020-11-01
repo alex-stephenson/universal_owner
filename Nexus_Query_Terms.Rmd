@@ -1,0 +1,215 @@
+---
+title: "Nexus Query Terms"
+author: "Alex Stephenson"
+date: "29/10/2020"
+output:
+  html_document: default
+  word_document: default
+---
+
+*Guide for use*: The below is all the potential search terms to use with nexus. Start by searching (using the search function) for the name of the company you want + query, e.g. 'AGL Energy Query'. Then copy everything in that section, and paste into Nexus. 
+
+
+### AGL Energy query:
+
+```{r message=F, echo=F, warning=F}
+library(tidyverse)
+library(readxl)
+
+
+data <- read_xlsx('ALex.xlsx')
+
+
+names<- c('search_1', 'term', 'search_2')
+
+colnames(data) <- names
+
+
+
+text <- paste(unlist(data$search_2), collapse =" OR ")
+
+data$search_2 <- text
+
+data_2 <- head(data, n = 21)
+
+engagement_terms <- paste(unlist(na.omit(data$term)), collapse =" OR ")
+
+data_2$term <- engagement_terms
+
+data_2$search_1 <- paste0(data_2$search_1, ' AND')
+data_2$search_2 <- paste0('AND ', data_2$search_2)
+
+
+
+
+data_2$all_terms <- paste(data_2$search_1, data_2$term, data_2$search_2, sep = ' ')
+                            
+
+print(data_2$all_terms[1])
+
+
+#writexl::write_xlsx(data_2,'alex_separate_cols.xlsx')
+
+```
+
+
+### AES Query
+
+```{r}
+print(data_2$all_terms[2])
+
+```
+
+
+### AGL Query
+
+```{r}
+print(data_2$all_terms[3])
+
+```
+
+
+
+### CEZ Query
+
+
+```{r}
+print(data_2$all_terms[4])
+
+```
+
+
+### Dominion Energy Query
+```{r}
+print(data_2$all_terms[5])
+
+```
+
+
+### Duke Query
+
+```{r}
+print(data_2$all_terms[6])
+
+```
+
+### Duke Energy Query
+```{r}
+print(data_2$all_terms[7])
+
+```
+
+
+### Е.ON Query
+```{r}
+print(data_2$all_terms[8])
+
+```
+
+
+
+### EON Query
+```{r}
+print(data_2$all_terms[9])
+
+```
+
+
+### Iberdrola Query
+```{r}
+print(data_2$all_terms[10])
+
+```
+
+
+### KEPCO Query
+```{r}
+print(data_2$all_terms[11])
+
+```
+
+
+
+### Korea Electric Power Corp Query
+
+```{r}
+print(data_2$all_terms[12])
+
+```
+
+
+### Nextera Energy Query
+```{r}
+print(data_2$all_terms[13])
+
+```
+
+
+
+### NTPC Query
+```{r}
+print(data_2$all_terms[14])
+
+```
+
+
+### Origin Query
+
+```{r}
+print(data_2$all_terms[15])
+
+```
+
+### Origin Energy Query
+```{r}
+print(data_2$all_terms[16])
+
+```
+
+
+### PGE Query
+```{r}
+print(data_2$all_terms[17])
+
+```
+
+
+### RWE Query
+```{r}
+print(data_2$all_terms[18])
+
+```
+
+
+### Southern Company Query
+```{r}
+print(data_2$all_terms[19])
+
+```
+
+
+
+### Tokyo Electric Power Query
+```{r}
+print(data_2$all_terms[20])
+
+```
+
+
+### TEPCO Query
+
+```{r}
+print(data_2$all_terms[21])
+
+```
+
+
+```{r message=F, echo =F, warning=F}
+#data_3 <- as.data.frame(paste(data_2$search_1, data_2$term, data_2$search_2))
+
+
+#write_csv(data_3, 'alex_one_col.csv')
+
+```
+
+
